@@ -38,7 +38,7 @@ class DemoPrimaryViewController: UIViewController {
         view.backgroundColor = colors[colorIndex]
     }
     
-    func showSecondaryView() {
+    @objc func showSecondaryView() {
         showSecondaryViewAnimated(true)
     }
     

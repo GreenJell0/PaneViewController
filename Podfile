@@ -1,17 +1,17 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 use_frameworks!
 
 target 'PaneViewController' do
-    pod 'Swiftification'
+    pod 'ObserverSet'
 end
 
 target 'PaneViewControllerTests' do
-    pod 'Swiftification'
+    pod 'ObserverSet'
 end
 
 target 'PaneViewControllerUITests' do
-    pod 'Swiftification'
+    pod 'ObserverSet'
 end

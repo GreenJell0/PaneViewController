@@ -21,7 +21,7 @@
 //
 
 import UIKit
-import Swiftification
+import ObserverSet
 
 @objc public enum PaneViewPinningState: Int {
     case openDefault = 1
@@ -65,21 +65,21 @@ open class PaneViewController: UIViewController {
     public var secondaryViewToBlur: UIView?
     public var shouldBlurWhenSideBySideResizes = true
     public var shouldAllowDragModal = true
-    public var handleColor = UIColor(colorLiteralRed: 197.0 / 255.0, green: 197.0 / 255.0, blue: 197.0 / 255.0, alpha: 0.5) {
+    public var handleColor = UIColor(red: 197.0 / 255.0, green: 197.0 / 255.0, blue: 197.0 / 255.0, alpha: 0.5) {
         didSet {
             if isViewLoaded {
                 handleView.backgroundColor = handleColor
             }
         }
     }
-    public var paneSeparatorColor = UIColor(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.16) {
+    public var paneSeparatorColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.16) {
         didSet {
             if isViewLoaded {
                 paneSeparatorView.backgroundColor = paneSeparatorColor
             }
         }
     }
-    public var modalShadowColor = UIColor(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.1) {
+    public var modalShadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1) {
         didSet {
             if isViewLoaded {
                 modalShadowView.backgroundColor = modalShadowColor
@@ -341,7 +341,7 @@ open class PaneViewController: UIViewController {
         }, completion: nil)
     }
     
-    func panGestureRecognized(_ gestureRecognizer: UIPanGestureRecognizer) {
+    @objc func panGestureRecognized(_ gestureRecognizer: UIPanGestureRecognizer) {
         switch gestureRecognizer.state {
         case .began:
             // Ignore if they're moving up/down too much
@@ -434,7 +434,7 @@ open class PaneViewController: UIViewController {
         }
     }
     
-    func tapGestureRecognized(_ gestureRecognizer: UITapGestureRecognizer) {
+    @objc func tapGestureRecognized(_ gestureRecognizer: UITapGestureRecognizer) {
         switch gestureRecognizer.state {
         case .ended:
             dismissSecondaryViewAnimated(true)

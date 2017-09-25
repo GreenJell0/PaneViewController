@@ -35,11 +35,11 @@ extension UIViewController: PaneViewControllerProtocol {
         return self as? PaneViewController ?? parent?.paneViewController
     }
     
-    public func showSecondaryViewAnimated(_ animated: Bool, pinningState: PaneViewPinningState = .openDefault) {
+    @objc public func showSecondaryViewAnimated(_ animated: Bool, pinningState: PaneViewPinningState = .openDefault) {
         parent?.showSecondaryViewAnimated(animated, pinningState: pinningState)
     }
     
-    public func dismissSecondaryViewAnimated(_ animated: Bool) {
+    @objc public func dismissSecondaryViewAnimated(_ animated: Bool) {
         parent?.dismissSecondaryViewAnimated(animated)
     }
     

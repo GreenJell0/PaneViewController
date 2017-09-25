@@ -34,7 +34,7 @@ class DemoSecondaryViewController: UIViewController {
         view.backgroundColor = UIColor.red
     }
     
-    func hideSecondaryView() {
+    @objc func hideSecondaryView() {
         dismissSecondaryViewAnimated(true)
     }
     

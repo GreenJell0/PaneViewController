@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let paneViewController = PaneViewController(primaryViewController: primaryNavigationController, secondaryViewController: secondaryNavigationController)
         window?.rootViewController = paneViewController
         let secondaryViewToBlur = UIView()
-        secondaryViewToBlur.backgroundColor = UIColor(colorLiteralRed: 0, green: 0, blue: 1, alpha: 0.5)
+        secondaryViewToBlur.backgroundColor = UIColor(red: 0, green: 0, blue: 1, alpha: 0.5)
         paneViewController.secondaryViewToBlur = secondaryViewToBlur
         window?.makeKeyAndVisible()
         
