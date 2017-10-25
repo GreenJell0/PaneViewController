@@ -330,6 +330,7 @@ open class PaneViewController: UIViewController {
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
+        updateSecondaryViewLocationForTraitCollection(traitCollection)
         updateSizeClassOfChildViewControllers()
     }
     
