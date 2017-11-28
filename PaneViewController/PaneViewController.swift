@@ -350,11 +350,11 @@ open class PaneViewController: UIViewController {
             
             touchStartedWithSecondaryOpen = isSecondaryViewShowing
             
-            delegate?.paneViewControllerDidStartPanning(self)
-            
             switch presentationMode {
             case .sideBySide:
                 if sideHandleTouchView.frame.contains(gestureRecognizer.location(in: view)) {
+                    delegate?.paneViewControllerDidStartPanning(self)
+                    
                     primaryViewWillChangeWidthObservers.notify(primaryViewController.view)
                     touchStartedDownInHandle = true
                     secondaryViewSideContainerDraggingWidthConstraint?.constant = secondaryViewSideContainerView.bounds.width
@@ -369,6 +369,8 @@ open class PaneViewController: UIViewController {
                 if modalHandleTouchView.frame.contains(gestureRecognizer.location(in: view)) ||
                     (shouldAllowDragModal && secondaryViewModalContainerView.frame.contains(gestureRecognizer.location(in: view))) {
                     // This allows the view to be dragged onto the screen from the right
+                    delegate?.paneViewControllerDidStartPanning(self)
+                    
                     if !isSecondaryViewShowing {
                         isSecondaryViewShowing = true
                         modalShadowImageView.alpha = 1
