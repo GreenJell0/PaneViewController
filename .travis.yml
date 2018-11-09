@@ -1,11 +1,11 @@
 sudo: false
 language: swift
-osx_image: xcode8.3
+osx_image: xcode10.1
 
 before_install: 
 - pod install
 
 script:
-- xcodebuild clean build test -workspace PaneViewController.xcworkspace -scheme PaneViewController -sdk iphonesimulator -destination "name=iPhone 5s,platform=iOS Simulator" | xcpretty
+- xcodebuild clean build test -workspace PaneViewController.xcworkspace -scheme PaneViewController -sdk iphonesimulator -destination "name=iPhone 8,platform=iOS Simulator" | xcpretty
 - pod lib lint --verbose
 

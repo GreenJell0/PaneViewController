@@ -202,11 +202,11 @@ open class PaneViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         
-        addChildViewController(primaryViewController)
-        primaryViewController.didMove(toParentViewController: self)
+        addChild(primaryViewController)
+        primaryViewController.didMove(toParent: self)
         
-        addChildViewController(secondaryViewController)
-        secondaryViewController.didMove(toParentViewController: self)
+        addChild(secondaryViewController)
+        secondaryViewController.didMove(toParent: self)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -570,11 +570,11 @@ open class PaneViewController: UIViewController {
         switch traitCollection.horizontalSizeClass {
         case .regular:
             // This value seemed to be a good one on iPad to choose when subviews should be compact or not
-            setOverrideTraitCollection(primaryViewController.view.bounds.width >= 500 ? regularTraitCollection : compactTraitCollection, forChildViewController: primaryViewController)
-            setOverrideTraitCollection(secondaryViewController.view.bounds.width >= 500 ? regularTraitCollection : compactTraitCollection, forChildViewController: secondaryViewController)
+            setOverrideTraitCollection(primaryViewController.view.bounds.width >= 500 ? regularTraitCollection : compactTraitCollection, forChild: primaryViewController)
+            setOverrideTraitCollection(secondaryViewController.view.bounds.width >= 500 ? regularTraitCollection : compactTraitCollection, forChild: secondaryViewController)
         case .compact, .unspecified:
-            setOverrideTraitCollection(compactTraitCollection, forChildViewController: primaryViewController)
-            setOverrideTraitCollection(compactTraitCollection, forChildViewController: secondaryViewController)
+            setOverrideTraitCollection(compactTraitCollection, forChild: primaryViewController)
+            setOverrideTraitCollection(compactTraitCollection, forChild: secondaryViewController)
         }
     }
     
