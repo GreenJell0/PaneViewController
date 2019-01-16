@@ -596,6 +596,7 @@ open class PaneViewController: UIViewController {
             isSecondaryViewShowing = true
             newSideSecondaryViewWidthConstraint = NSLayoutConstraint(item: secondaryViewSideContainerView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: PaneViewController.minimumWidth)
             secondaryViewSideContainerView.addConstraint(newSideSecondaryViewWidthConstraint)
+            secondaryViewContainerTrailingConstraint?.constant = 0
         case .closed:
             isSecondaryViewShowing = false
             newSideSecondaryViewWidthConstraint = NSLayoutConstraint(item: secondaryViewSideContainerView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
