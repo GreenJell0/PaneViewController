@@ -23,7 +23,7 @@
 import UIKit
 import ObserverSet
 
-@objc public enum PaneViewPinningState: Int {
+@objc public enum PaneViewPinningState: Int, CaseIterable {
     case openDefault = 1
     case openHalf = 2
     case closed = 3
@@ -37,10 +37,6 @@ import ObserverSet
         case .closed:
             return 0
         }
-    }
-    
-    static func all() -> [PaneViewPinningState] {
-        return [.openDefault, .openHalf, .closed]
     }
 }
 
@@ -106,7 +102,7 @@ open class PaneViewController: UIViewController {
     private var touchStartedDownInHandle = false
     private var touchStartedWithSecondaryOpen = false
     
-    private var secondaryViewContainerTrailingConstraint: NSLayoutConstraint?
+    private var secondaryViewSideContainerTrailingConstraint: NSLayoutConstraint?
     
     private var secondaryViewSideContainerCurrentWidthConstraint: NSLayoutConstraint?
     private var secondaryViewSideContainerDraggingWidthConstraint: NSLayoutConstraint?
@@ -116,7 +112,9 @@ open class PaneViewController: UIViewController {
     private var secondaryViewModalContainerOpenLocation = CGFloat(0)
     private var paneViewPinningState = PaneViewPinningState.closed
     private var previousPaneViewPinningState = PaneViewPinningState.closed
+    private var widthScreenWillTransitionTo: CGFloat = 0.0
     private var modalStartLocationX: CGFloat?
+    private var minimumSideBySideScreenWidth: CGFloat = 667
     
     fileprivate lazy var secondaryViewSideContainerView: UIView = {
         let containerView = UIView()
@@ -225,6 +223,8 @@ open class PaneViewController: UIViewController {
         
         view.clipsToBounds = true
 
+        widthScreenWillTransitionTo = view.frame.width
+
         guard let primaryView = primaryViewController.view else { return }
         
         primaryView.frame = view.bounds
@@ -245,8 +245,10 @@ open class PaneViewController: UIViewController {
             secondaryViewSideContainerView.leadingAnchor.constraint(equalTo: primaryView.trailingAnchor),
             secondaryViewSideContainerView.topAnchor.constraint(equalTo: view.topAnchor),
             secondaryViewSideContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
             secondaryViewModalContainerView.topAnchor.constraint(equalTo: view.topAnchor),
             secondaryViewModalContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
             sideHandleTouchView.topAnchor.constraint(equalTo: view.topAnchor),
             sideHandleTouchView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
@@ -265,10 +267,10 @@ open class PaneViewController: UIViewController {
         
         secondaryViewSideContainerView.addSubview(sideHandleView)
 
-        let secondaryViewContainerTrailingConstraint = secondaryViewSideContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        secondaryViewContainerTrailingConstraint.isActive = true
-        view.addConstraint(secondaryViewContainerTrailingConstraint)
-        self.secondaryViewContainerTrailingConstraint = secondaryViewContainerTrailingConstraint
+        let secondaryViewSideContainerTrailingConstraint = secondaryViewSideContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        secondaryViewSideContainerTrailingConstraint.isActive = true
+        view.addConstraint(secondaryViewSideContainerTrailingConstraint)
+        self.secondaryViewSideContainerTrailingConstraint = secondaryViewSideContainerTrailingConstraint
 
         let secondaryViewSideContainerWidthConstraint = secondaryViewSideContainerView.widthAnchor.constraint(equalToConstant: 0)
         secondaryViewSideContainerView.addConstraint(secondaryViewSideContainerWidthConstraint)
@@ -305,10 +307,10 @@ open class PaneViewController: UIViewController {
             modalHandleTouchView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
         
-        updateSecondaryViewLocationForTraitCollection(traitCollection)
-        
+        updateSecondaryViewLocationForNewWidth(view.frame.width)
+
         updateSizeClassOfChildViewControllers()
-        
+
         view.addGestureRecognizer(panGestureRecognizer)
         modalShadowView.addGestureRecognizer(modalShadowCloseTapGestureRecognizer)
         modalHandleTouchView.addGestureRecognizer(modalHandleCloseTapGestureRecognizer)
@@ -319,11 +321,11 @@ open class PaneViewController: UIViewController {
         
         if !touchStartedDownInHandle {
             // Find the narrow side and make it so the modal only goes out that far, even in the other orientation
-            if traitCollection.horizontalSizeClass == .compact || traitCollection.verticalSizeClass == .compact {
+            if view.frame.width < minimumSideBySideScreenWidth || view.frame.height < minimumSideBySideScreenWidth {
                 let narrowestSide = min(view.bounds.height, view.bounds.width)
                 secondaryViewModalContainerOpenLocation = view.bounds.width - narrowestSide
                 secondaryViewModalContainerWidthConstraint?.constant = narrowestSide
-                
+
                 if isSecondaryViewShowing {
                     secondaryViewModalContainerShowingLeadingConstraint?.constant = secondaryViewModalContainerOpenLocation
                 }
@@ -332,43 +334,13 @@ open class PaneViewController: UIViewController {
             }
         }
     }
-    
-    override open func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        
-        // If they're going from Regular to Compact, save off the width enum so we can restore it if they go back
-        if newCollection.horizontalSizeClass == .compact && traitCollection.horizontalSizeClass == .regular {
-            previousPaneViewPinningState = paneViewPinningState
-        }
-        
-        // We also want to show the default side view had they not had the side view showing, but did have the modal showing
-        if newCollection.horizontalSizeClass == .regular && traitCollection.horizontalSizeClass == .compact && previousPaneViewPinningState == .closed && isSecondaryViewShowing {
-            previousPaneViewPinningState = .openDefault
-        }
-        
-        // Close the secondary view if we're changing from compact to regular or regular to compact
-        if newCollection.horizontalSizeClass != traitCollection.horizontalSizeClass {
-            dismissSecondaryViewAnimated(false)
-        }
-        
-        updateSecondaryViewLocationForTraitCollection(newCollection)
-        
-        // If we're going back to Regular from Compact, restore the secondary view width enum
-        if newCollection.horizontalSizeClass == .regular && traitCollection.horizontalSizeClass == .compact {
-            updateSecondaryViewSideBySideConstraint(forPinningState: previousPaneViewPinningState)
-        }
-    }
-    
-    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        updateSecondaryViewLocationForTraitCollection(traitCollection)
-        updateSizeClassOfChildViewControllers()
-    }
-    
+
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
+
+        widthScreenWillTransitionTo = size.width
+        updateSecondaryViewLocationForNewWidth(size.width)
+
         coordinator.animate(alongsideTransition: { _ in
             self.updateSizeClassOfChildViewControllers()
         }, completion: nil)
@@ -427,7 +399,7 @@ open class PaneViewController: UIViewController {
                 let newConstant = abs(location.x - view.bounds.width)
                 
                 if newConstant < PaneViewController.minimumWidth {
-                    secondaryViewContainerTrailingConstraint?.constant = -newConstant + PaneViewController.minimumWidth
+                    secondaryViewSideContainerTrailingConstraint?.constant = -newConstant + PaneViewController.minimumWidth
                     secondaryViewSideContainerDraggingWidthConstraint?.constant = PaneViewController.minimumWidth
                 } else {
                     secondaryViewSideContainerDraggingWidthConstraint?.constant = newConstant
@@ -484,22 +456,22 @@ open class PaneViewController: UIViewController {
         guard !isSecondaryViewShowing else { return }
         
         isSecondaryViewShowing = true
-        
+        paneViewPinningState = pinningState
+
         let modalShadowViewAlpha: CGFloat
-        switch traitCollection.horizontalSizeClass {
-        case .regular:
+        if widthScreenWillTransitionTo >= minimumSideBySideScreenWidth {
             modalShadowViewAlpha = 0
             blurIfNeeded()
             primaryViewWillChangeWidthObservers.notify(primaryViewController.view)
             updateSecondaryViewSideBySideConstraint(forPinningState: pinningState)
-        case .compact, .unspecified:
+        } else {
             primaryViewController.view.addSubview(modalShadowView)
             modalShadowViewAlpha = 1
             secondaryViewModalContainerShowingLeadingConstraint?.constant = secondaryViewModalContainerOpenLocation
             secondaryViewModalContainerHiddenLeadingConstraint?.isActive = false
             secondaryViewModalContainerShowingLeadingConstraint?.isActive = true
         }
-        
+
         modalShadowImageView.alpha = modalShadowViewAlpha
         let startingHorizontalSizeClass = self.traitCollection.horizontalSizeClass
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
@@ -518,17 +490,17 @@ open class PaneViewController: UIViewController {
         guard isSecondaryViewShowing else { return }
         
         isSecondaryViewShowing = false
-        
-        switch traitCollection.horizontalSizeClass {
-        case .regular:
+        paneViewPinningState = .closed
+
+        if view.frame.width >= minimumSideBySideScreenWidth {
             blurIfNeeded()
             primaryViewWillChangeWidthObservers.notify(primaryViewController.view)
-            updateSecondaryViewSideBySideConstraint(forPinningState: .closed)
-        case .compact, .unspecified:
+            updateSecondaryViewSideBySideConstraint(forPinningState: paneViewPinningState)
+        } else {
             secondaryViewModalContainerShowingLeadingConstraint?.isActive = false
             secondaryViewModalContainerHiddenLeadingConstraint?.isActive = true
         }
-        
+
         let startingHorizontalSizeClass = self.traitCollection.horizontalSizeClass
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.view.layoutIfNeeded()
@@ -596,7 +568,7 @@ open class PaneViewController: UIViewController {
         // The vertical size class will be the same as self's
         let compactTraitCollection = UITraitCollection(traitsFrom: [UITraitCollection(verticalSizeClass: traitCollection.verticalSizeClass), UITraitCollection(horizontalSizeClass: .compact)])
         let regularTraitCollection = UITraitCollection(traitsFrom: [UITraitCollection(verticalSizeClass: traitCollection.verticalSizeClass), UITraitCollection(horizontalSizeClass: .regular)])
-        
+
         // If self is Regular, the child controllers may be Compact
         // If self is Compact, the child controllers are all Compact
         switch traitCollection.horizontalSizeClass {
@@ -615,9 +587,9 @@ open class PaneViewController: UIViewController {
             secondaryViewSideContainerView.removeConstraint(secondaryViewSideContainerCurrentWidthConstraint)
             view.removeConstraint(secondaryViewSideContainerCurrentWidthConstraint)
         }
-        
+
         paneViewPinningState = pinningState
-        
+
         let newSideSecondaryViewWidthConstraint: NSLayoutConstraint
         switch pinningState {
         case .openHalf:
@@ -628,12 +600,12 @@ open class PaneViewController: UIViewController {
             isSecondaryViewShowing = true
             newSideSecondaryViewWidthConstraint = secondaryViewSideContainerView.widthAnchor.constraint(equalToConstant: PaneViewController.minimumWidth)
             secondaryViewSideContainerView.addConstraint(newSideSecondaryViewWidthConstraint)
-            secondaryViewContainerTrailingConstraint?.constant = 0
+            secondaryViewSideContainerTrailingConstraint?.constant = 0
         case .closed:
             isSecondaryViewShowing = false
             newSideSecondaryViewWidthConstraint = secondaryViewSideContainerView.widthAnchor.constraint(equalToConstant: 0)
             secondaryViewSideContainerView.addConstraint(newSideSecondaryViewWidthConstraint)
-            secondaryViewContainerTrailingConstraint?.constant = 0
+            secondaryViewSideContainerTrailingConstraint?.constant = 0
         }
 
         newSideSecondaryViewWidthConstraint.isActive = true
@@ -643,21 +615,22 @@ open class PaneViewController: UIViewController {
     private func moveSideViewToPredeterminedPositionClosestToWidthAnimated(_ animated: Bool) {
         let fullWidth = view.bounds.width
         let currentWidth: CGFloat = {
-            if secondaryViewContainerTrailingConstraint?.isActive == true && secondaryViewContainerTrailingConstraint?.constant ?? 0 > PaneViewController.minimumWidth / 2 {
-                return PaneViewController.minimumWidth - (secondaryViewContainerTrailingConstraint?.constant ?? PaneViewController.minimumWidth)
+            if secondaryViewSideContainerTrailingConstraint?.isActive == true && secondaryViewSideContainerTrailingConstraint?.constant ?? 0 > PaneViewController.minimumWidth / 2 {
+                return PaneViewController.minimumWidth - (secondaryViewSideContainerTrailingConstraint?.constant ?? PaneViewController.minimumWidth)
             } else {
                 return secondaryViewSideContainerView.bounds.width
             }
         }()
         var bestPinningState: PaneViewPinningState = .closed
-        for pinningState in PaneViewPinningState.all() {
+        for pinningState in PaneViewPinningState.allCases {
             if abs(currentWidth - bestPinningState.paneViewWidth(forScreenWidth: fullWidth)) > abs(currentWidth - pinningState.paneViewWidth(forScreenWidth: fullWidth)) {
                 bestPinningState = pinningState
             }
         }
-        
+
+        paneViewPinningState = bestPinningState
         updateSecondaryViewSideBySideConstraint(forPinningState: bestPinningState)
-        
+
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.view.layoutIfNeeded()
         }, completion: { _ in
@@ -668,16 +641,21 @@ open class PaneViewController: UIViewController {
         
     }
     
-    private func updateSecondaryViewLocationForTraitCollection(_ traitCollection: UITraitCollection) {
-        switch traitCollection.horizontalSizeClass {
-        case .regular:
+    private func updateSecondaryViewLocationForNewWidth(_ newWidth: CGFloat) {
+        if isSecondaryViewShowing {
+            dismissSecondaryViewAnimated(false)
+            showSecondaryViewAnimated(false)
+        }
+
+        if newWidth >= minimumSideBySideScreenWidth {
             presentationMode = .sideBySide
             sideHandleTouchView.isUserInteractionEnabled = true
             modalHandleTouchView.isUserInteractionEnabled = false
             secondaryViewController.view.frame = secondaryViewSideContainerView.bounds
             secondaryViewController.view.translatesAutoresizingMaskIntoConstraints = true
             secondaryViewSideContainerView.insertSubview(secondaryViewController.view, at: 0)
-        case .compact, .unspecified:
+            updateSecondaryViewSideBySideConstraint(forPinningState: paneViewPinningState)
+        } else {
             presentationMode = .modal
             sideHandleTouchView.isUserInteractionEnabled = false
             modalHandleTouchView.isUserInteractionEnabled = true
