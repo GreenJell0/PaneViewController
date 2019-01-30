@@ -1,17 +1,17 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '9.0'
+platform :ios, '10.0'
 
 use_frameworks!
 
 target 'PaneViewController' do
-    pod 'ObserverSet'
-end
-
-target 'PaneViewControllerTests' do
-    pod 'ObserverSet'
-end
-
-target 'PaneViewControllerUITests' do
-    pod 'ObserverSet'
+  pod 'Signals', :git => 'https://github.com/artman/Signals.git', :tag => '6.0.0'
+  
+  target 'PaneViewControllerTests' do
+    inherit! :search_paths
+  end
+  
+  target 'PaneViewControllerUITests' do
+    inherit! :search_paths
+  end
 end

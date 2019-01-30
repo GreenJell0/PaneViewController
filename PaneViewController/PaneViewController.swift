@@ -21,7 +21,7 @@
 //
 
 import UIKit
-import ObserverSet
+import Signals
 
 @objc public enum PaneViewPinningState: Int, CaseIterable {
     case openDefault = 1
@@ -42,7 +42,8 @@ import ObserverSet
 
 open class PaneViewController: UIViewController {
     
-    fileprivate static let minimumWidth: CGFloat = 320
+    public static var minimumWidth: CGFloat = 320
+    public static var modalOpenGap: CGFloat = 20
     
     public enum PresentationMode {
         case sideBySide
@@ -51,8 +52,8 @@ open class PaneViewController: UIViewController {
     
     public let primaryViewController: UIViewController
     public let secondaryViewController: UIViewController
-    public let primaryViewWillChangeWidthObservers = ObserverSet<UIView>()
-    public let primaryViewDidChangeWidthObservers = ObserverSet<UIView>()
+    public let primaryViewWillChangeWidthObservers = Signal<UIView>()
+    public let primaryViewDidChangeWidthObservers = Signal<UIView>()
     public weak var delegate: PaneViewControllerDelegate?
     
     public private(set) var presentationMode = PresentationMode.modal
@@ -96,14 +97,11 @@ open class PaneViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognized))
         return tapGestureRecognizer
     }()
-    
-    public var modalOpenGap = CGFloat(20)
-    
+
     private var touchStartedDownInHandle = false
     private var touchStartedWithSecondaryOpen = false
     
     private var secondaryViewSideContainerTrailingConstraint: NSLayoutConstraint?
-    
     private var secondaryViewSideContainerCurrentWidthConstraint: NSLayoutConstraint?
     private var secondaryViewSideContainerDraggingWidthConstraint: NSLayoutConstraint?
     private var secondaryViewModalContainerHiddenLeadingConstraint: NSLayoutConstraint?
@@ -114,7 +112,7 @@ open class PaneViewController: UIViewController {
     private var previousPaneViewPinningState = PaneViewPinningState.closed
     private var widthScreenWillTransitionTo: CGFloat = 0.0
     private var modalStartLocationX: CGFloat?
-    private var minimumSideBySideScreenWidth: CGFloat = 667
+    private let minimumSideBySideScreenWidth: CGFloat = (PaneViewController.minimumWidth * 2) + PaneViewController.modalOpenGap
     
     fileprivate lazy var secondaryViewSideContainerView: UIView = {
         let containerView = UIView()
@@ -122,12 +120,14 @@ open class PaneViewController: UIViewController {
         containerView.clipsToBounds = true
         return containerView
     }()
+    
     fileprivate lazy var secondaryViewModalContainerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.clipsToBounds = true
         return containerView
     }()
+    
     private lazy var modalShadowView: UIView = {
         let shadowView = UIView()
         shadowView.alpha = 0
@@ -135,12 +135,14 @@ open class PaneViewController: UIViewController {
         shadowView.translatesAutoresizingMaskIntoConstraints = false
         return shadowView
     }()
+    
     private lazy var modalShadowImageView: UIImageView = {
         let shadowImageView = UIImageView(image: UIImage(named: "modalEdgeShadow", in: Bundle(for: PaneViewController.self), compatibleWith: nil))
         shadowImageView.alpha = 0
         shadowImageView.translatesAutoresizingMaskIntoConstraints = false
         return shadowImageView
     }()
+    
     private lazy var sideHandleTouchView: UIView = {
         let touchHandleView = HandleView()
         touchHandleView.delegate = self
@@ -148,6 +150,7 @@ open class PaneViewController: UIViewController {
         touchHandleView.translatesAutoresizingMaskIntoConstraints = false
         return touchHandleView
     }()
+    
     private lazy var modalHandleTouchView: UIView = {
         let touchHandleView = HandleView()
         touchHandleView.delegate = self
@@ -155,6 +158,7 @@ open class PaneViewController: UIViewController {
         touchHandleView.translatesAutoresizingMaskIntoConstraints = false
         return touchHandleView
     }()
+    
     private lazy var handleView: UIView = {
         let handleView = UIView()
         handleView.translatesAutoresizingMaskIntoConstraints = false
@@ -162,12 +166,14 @@ open class PaneViewController: UIViewController {
         handleView.backgroundColor = self.handleColor
         return handleView
     }()
+    
     private lazy var paneSeparatorView: UIView = {
         let separatorView = UIView()
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         separatorView.backgroundColor = self.paneSeparatorColor
         return separatorView
     }()
+    
     private lazy var sideHandleView: UIView = {
         let sideHandleView = UIView()
         sideHandleView.translatesAutoresizingMaskIntoConstraints = false
@@ -186,15 +192,17 @@ open class PaneViewController: UIViewController {
             handleView.widthAnchor.constraint(equalToConstant: 4),
             handleView.heightAnchor.constraint(equalToConstant: 44),
             handleView.centerYAnchor.constraint(equalTo: sideHandleView.centerYAnchor)
-            ])
+        ])
 
         return sideHandleView
     }()
+    
     private lazy var primaryVisualEffectView: UIVisualEffectView = {
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return visualEffectView
     }()
+    
     private lazy var secondaryVisualEffectView: UIVisualEffectView = {
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -359,7 +367,7 @@ open class PaneViewController: UIViewController {
                 if sideHandleTouchView.frame.contains(gestureRecognizer.location(in: view)) {
                     delegate?.paneViewControllerDidStartPanning(self)
                     
-                    primaryViewWillChangeWidthObservers.notify(primaryViewController.view)
+                    primaryViewWillChangeWidthObservers.fire(primaryViewController.view)
                     touchStartedDownInHandle = true
                     secondaryViewSideContainerDraggingWidthConstraint?.constant = secondaryViewSideContainerView.bounds.width
                     secondaryViewSideContainerDraggingWidthConstraint?.isActive = true
@@ -405,7 +413,7 @@ open class PaneViewController: UIViewController {
                     secondaryViewSideContainerDraggingWidthConstraint?.constant = newConstant
                 }
             case .modal:
-                secondaryViewModalContainerShowingLeadingConstraint?.constant = max(location.x - modalOpenGap - (modalStartLocationX ?? 0), secondaryViewModalContainerOpenLocation)
+                secondaryViewModalContainerShowingLeadingConstraint?.constant = max(location.x - PaneViewController.modalOpenGap - (modalStartLocationX ?? 0), secondaryViewModalContainerOpenLocation)
                 modalShadowView.alpha = 1.0 - (location.x / view.bounds.width)
             }
         case .ended, .failed, .cancelled:
@@ -418,7 +426,7 @@ open class PaneViewController: UIViewController {
                 secondaryViewSideContainerDraggingWidthConstraint?.isActive = false
                 secondaryViewSideContainerCurrentWidthConstraint?.isActive = true
                 moveSideViewToPredeterminedPositionClosestToWidthAnimated(true)
-                primaryViewDidChangeWidthObservers.notify(primaryViewController.view)
+                primaryViewDidChangeWidthObservers.fire(primaryViewController.view)
             case .modal:
                 // If they tapped or dragged past the first quarter of the screen (if secondary was open) or drag only to the first quarter of the screen (if secondary started closed), close (again)
                 let dragVelocity = gestureRecognizer.velocity(in: view).x
@@ -462,7 +470,7 @@ open class PaneViewController: UIViewController {
         if widthScreenWillTransitionTo >= minimumSideBySideScreenWidth {
             modalShadowViewAlpha = 0
             blurIfNeeded()
-            primaryViewWillChangeWidthObservers.notify(primaryViewController.view)
+            primaryViewWillChangeWidthObservers.fire(primaryViewController.view)
             updateSecondaryViewSideBySideConstraint(forPinningState: pinningState)
         } else {
             primaryViewController.view.addSubview(modalShadowView)
@@ -481,7 +489,7 @@ open class PaneViewController: UIViewController {
             self.removeBlurIfNeeded()
             self.updateSizeClassOfChildViewControllers()
             if startingHorizontalSizeClass == .regular {
-                self.primaryViewDidChangeWidthObservers.notify(self.primaryViewController.view)
+                self.primaryViewDidChangeWidthObservers.fire(self.primaryViewController.view)
             }
         })
     }
@@ -494,7 +502,7 @@ open class PaneViewController: UIViewController {
 
         if view.frame.width >= minimumSideBySideScreenWidth {
             blurIfNeeded()
-            primaryViewWillChangeWidthObservers.notify(primaryViewController.view)
+            primaryViewWillChangeWidthObservers.fire(primaryViewController.view)
             updateSecondaryViewSideBySideConstraint(forPinningState: paneViewPinningState)
         } else {
             secondaryViewModalContainerShowingLeadingConstraint?.isActive = false
@@ -510,7 +518,7 @@ open class PaneViewController: UIViewController {
             self.removeBlurIfNeeded()
             self.updateSizeClassOfChildViewControllers()
             if startingHorizontalSizeClass == .regular {
-                self.primaryViewDidChangeWidthObservers.notify(self.primaryViewController.view)
+                self.primaryViewDidChangeWidthObservers.fire(self.primaryViewController.view)
             }
         })
     }
@@ -636,7 +644,7 @@ open class PaneViewController: UIViewController {
         }, completion: { _ in
             self.removeBlurIfNeeded()
             self.updateSizeClassOfChildViewControllers()
-            self.primaryViewDidChangeWidthObservers.notify(self.primaryViewController.view)
+            self.primaryViewDidChangeWidthObservers.fire(self.primaryViewController.view)
         })
         
     }
@@ -665,7 +673,7 @@ open class PaneViewController: UIViewController {
             secondaryViewModalContainerView.removeConstraints(modalShadowView.constraints)
 
             NSLayoutConstraint.activate([
-                secondaryViewController.view.leadingAnchor.constraint(equalTo: secondaryViewModalContainerView.leadingAnchor, constant: modalOpenGap),
+                secondaryViewController.view.leadingAnchor.constraint(equalTo: secondaryViewModalContainerView.leadingAnchor, constant: PaneViewController.modalOpenGap),
                 secondaryViewController.view.trailingAnchor.constraint(equalTo: secondaryViewModalContainerView.trailingAnchor),
                 secondaryViewController.view.topAnchor.constraint(equalTo: secondaryViewModalContainerView.topAnchor),
                 secondaryViewController.view.bottomAnchor.constraint(equalTo: secondaryViewModalContainerView.bottomAnchor),
@@ -673,7 +681,7 @@ open class PaneViewController: UIViewController {
                 modalShadowImageView.trailingAnchor.constraint(equalTo: secondaryViewController.view.leadingAnchor),
                 modalShadowImageView.topAnchor.constraint(equalTo: secondaryViewModalContainerView.topAnchor),
                 modalShadowImageView.bottomAnchor.constraint(equalTo: secondaryViewModalContainerView.bottomAnchor)
-                ])
+            ])
         }
     }
     

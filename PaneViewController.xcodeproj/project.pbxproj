@@ -235,7 +235,6 @@
 				ECA3325C1C7F62B7008D5F42 /* Sources */,
 				ECA3325D1C7F62B7008D5F42 /* Frameworks */,
 				ECA3325E1C7F62B7008D5F42 /* Resources */,
-				3D8094EC9D120952D7E42D88 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -255,7 +254,6 @@
 				ECA332671C7F62B7008D5F42 /* Sources */,
 				ECA332681C7F62B7008D5F42 /* Frameworks */,
 				ECA332691C7F62B7008D5F42 /* Resources */,
-				E72A7F7788E957F41238C602 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -359,24 +357,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3D8094EC9D120952D7E42D88 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PaneViewControllerTests/Pods-PaneViewControllerTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ObserverSet/ObserverSet.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObserverSet.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaneViewControllerTests/Pods-PaneViewControllerTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		557AE572277DF73580B5B161 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -401,16 +381,16 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PaneViewController/Pods-PaneViewController-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ObserverSet/ObserverSet.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-PaneViewController/Pods-PaneViewController-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Signals/Signals.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObserverSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Signals.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaneViewController/Pods-PaneViewController-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PaneViewController/Pods-PaneViewController-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A74F91E59DE5B4556CAC0E16 /* [CP] Check Pods Manifest.lock */ = {
@@ -429,24 +409,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E72A7F7788E957F41238C602 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PaneViewControllerUITests/Pods-PaneViewControllerUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ObserverSet/ObserverSet.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObserverSet.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaneViewControllerUITests/Pods-PaneViewControllerUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ECA3327D1C7F6353008D5F42 /* Swiftlint Run Script */ = {
@@ -567,7 +529,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -616,7 +578,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -631,11 +593,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E00C5DE7B2C34215798DFAB6 /* Pods-PaneViewController.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/PaneViewControllerDemo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.lds.PaneViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -649,11 +609,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 72E75ABB8D7242D34EC95824 /* Pods-PaneViewController.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/PaneViewControllerDemo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.lds.PaneViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -666,10 +624,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 90BFE3E369695068C0D4C012 /* Pods-PaneViewControllerTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = PaneViewControllerTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.lds.PaneViewControllerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -682,10 +638,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6BA9D48A18E59BC52BE2526B /* Pods-PaneViewControllerTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = PaneViewControllerTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.lds.PaneViewControllerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -698,9 +652,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2044A18D4BC435D4B56C6FC1 /* Pods-PaneViewControllerUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = PaneViewControllerUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.lds.PaneViewControllerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -714,9 +666,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 77DC8684AA9C797EA615EFD6 /* Pods-PaneViewControllerUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = PaneViewControllerUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.lds.PaneViewControllerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

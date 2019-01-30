@@ -1,16 +1,22 @@
 PODS:
-  - ObserverSet (1.0.2)
+  - Signals (6.0.0)
 
 DEPENDENCIES:
-  - ObserverSet
+  - Signals (from `https://github.com/artman/Signals.git`, tag `6.0.0`)
 
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - ObserverSet
+EXTERNAL SOURCES:
+  Signals:
+    :git: https://github.com/artman/Signals.git
+    :tag: 6.0.0
+
+CHECKOUT OPTIONS:
+  Signals:
+    :git: https://github.com/artman/Signals.git
+    :tag: 6.0.0
 
 SPEC CHECKSUMS:
-  ObserverSet: ab2275783b4cf39b90e2ceb937e763184d7691e5
+  Signals: 71e3b5832062e61d3703d6d5a760c3fafb637c0e
 
-PODFILE CHECKSUM: 54ee6f91e1de607b3a3d3fee8e18ec349f780873
+PODFILE CHECKSUM: 7ab3991c8c8ab5216ba92142f5f826ff3ce7ca26
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.rc.1
