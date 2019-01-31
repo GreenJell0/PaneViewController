@@ -52,8 +52,8 @@ open class PaneViewController: UIViewController {
     
     public let primaryViewController: UIViewController
     public let secondaryViewController: UIViewController
-    public let primaryViewWillChangeWidthObservers = Signal<UIView>()
-    public let primaryViewDidChangeWidthObservers = Signal<UIView>()
+    public let primaryViewWillChangeWidthObservers = Signals.Signal<UIView>()
+    public let primaryViewDidChangeWidthObservers = Signals.Signal<UIView>()
     public weak var delegate: PaneViewControllerDelegate?
     
     public private(set) var presentationMode = PresentationMode.modal
