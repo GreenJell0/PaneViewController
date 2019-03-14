@@ -481,15 +481,19 @@ open class PaneViewController: UIViewController {
         }
 
         modalShadowImageView.alpha = modalShadowViewAlpha
-        let startingHorizontalSizeClass = self.traitCollection.horizontalSizeClass
+
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.view.layoutIfNeeded()
             self.modalShadowView.alpha = modalShadowViewAlpha
         }, completion: { _ in
             self.removeBlurIfNeeded()
             self.updateSizeClassOfChildViewControllers()
-            if startingHorizontalSizeClass == .regular {
+
+            switch self.presentationMode {
+            case .sideBySide:
                 self.primaryViewDidChangeWidthObservers.fire(self.primaryViewController.view)
+            case .modal:
+                break
             }
         })
     }
@@ -509,7 +513,6 @@ open class PaneViewController: UIViewController {
             secondaryViewModalContainerHiddenLeadingConstraint?.isActive = true
         }
 
-        let startingHorizontalSizeClass = self.traitCollection.horizontalSizeClass
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.view.layoutIfNeeded()
             self.modalShadowView.alpha = 0
@@ -517,8 +520,12 @@ open class PaneViewController: UIViewController {
             self.modalShadowImageView.alpha = 0
             self.removeBlurIfNeeded()
             self.updateSizeClassOfChildViewControllers()
-            if startingHorizontalSizeClass == .regular {
+
+            switch self.presentationMode {
+            case .sideBySide:
                 self.primaryViewDidChangeWidthObservers.fire(self.primaryViewController.view)
+            case .modal:
+                break
             }
         })
     }
