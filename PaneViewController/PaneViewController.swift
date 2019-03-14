@@ -58,6 +58,7 @@ open class PaneViewController: UIViewController {
     
     public private(set) var presentationMode = PresentationMode.modal
     public private(set) var isSecondaryViewShowing = false
+    public var canOpenSecondaryViewWithSwipe = true
     public var primaryViewToBlur: UIView?
     public var secondaryViewToBlur: UIView?
     public var shouldBlurWhenSideBySideResizes = true
@@ -355,6 +356,8 @@ open class PaneViewController: UIViewController {
     }
     
     @objc func panGestureRecognized(_ gestureRecognizer: UIPanGestureRecognizer) {
+        guard canOpenSecondaryViewWithSwipe || isSecondaryViewShowing else { return }
+        
         switch gestureRecognizer.state {
         case .began:
             // Ignore if they're moving up/down too much
