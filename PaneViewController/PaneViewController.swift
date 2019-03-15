@@ -356,8 +356,7 @@ open class PaneViewController: UIViewController {
     }
     
     @objc func panGestureRecognized(_ gestureRecognizer: UIPanGestureRecognizer) {
-        guard canOpenSecondaryViewWithSwipe || isSecondaryViewShowing else { return }
-        
+
         switch gestureRecognizer.state {
         case .began:
             // Ignore if they're moving up/down too much
@@ -368,6 +367,8 @@ open class PaneViewController: UIViewController {
             switch presentationMode {
             case .sideBySide:
                 if sideHandleTouchView.frame.contains(gestureRecognizer.location(in: view)) {
+                    guard canOpenSecondaryViewWithSwipe || isSecondaryViewShowing else { return }
+
                     delegate?.paneViewControllerDidStartPanning(self)
                     
                     primaryViewWillChangeWidthObservers.fire(primaryViewController.view)
