@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PaneViewController"
-  s.version      = "4.3.3"
+  s.version      = "4.3.4"
   s.summary      = "A side drawer controller"
   s.homepage     = "https://www.lds.org/pages/mobileapps?lang=eng"
   s.description  = <<-DESC
