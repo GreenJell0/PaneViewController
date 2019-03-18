@@ -359,16 +359,15 @@ open class PaneViewController: UIViewController {
 
         switch gestureRecognizer.state {
         case .began:
-            // Ignore if they're moving up/down too much
-            guard abs(gestureRecognizer.velocity(in: view).y) < abs(gestureRecognizer.velocity(in: view).x) else { break }
-            
+            // Ignore if they're moving up/down too much, or if secondary view is blocked from opening with a swipe
+            guard abs(gestureRecognizer.velocity(in: view).y) < abs(gestureRecognizer.velocity(in: view).x),
+                (canOpenSecondaryViewWithSwipe || isSecondaryViewShowing) else { return }
+
             touchStartedWithSecondaryOpen = isSecondaryViewShowing
             
             switch presentationMode {
             case .sideBySide:
                 if sideHandleTouchView.frame.contains(gestureRecognizer.location(in: view)) {
-                    guard canOpenSecondaryViewWithSwipe || isSecondaryViewShowing else { return }
-
                     delegate?.paneViewControllerDidStartPanning(self)
                     
                     primaryViewWillChangeWidthObservers.fire(primaryViewController.view)
