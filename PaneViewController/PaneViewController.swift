@@ -449,6 +449,8 @@ open class PaneViewController: UIViewController {
             touchStartedDownInHandle = false
         case .possible:
             break
+        @unknown default:
+            break
         }
     }
     
@@ -597,6 +599,8 @@ open class PaneViewController: UIViewController {
         case .compact, .unspecified:
             setOverrideTraitCollection(compactTraitCollection, forChild: primaryViewController)
             setOverrideTraitCollection(compactTraitCollection, forChild: secondaryViewController)
+        @unknown default:
+            break
         }
     }
     

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PaneViewController"
-  s.version      = "4.3.4"
+  s.version      = "4.4.0"
   s.summary      = "A side drawer controller"
   s.homepage     = "https://www.lds.org/pages/mobileapps?lang=eng"
   s.description  = <<-DESC
@@ -14,6 +14,6 @@ A side drawer controller that toggles between modal and side by side view depend
   s.source_files = "PaneViewController/*.{h,m,swift}"
   s.resources    = "Resources/PaneViewController.xcassets"
   s.framework    = "UIKit"
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
   s.dependency "Signals"
 end

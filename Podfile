@@ -5,7 +5,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target 'PaneViewController' do
-  pod 'Signals', :git => 'https://github.com/artman/Signals.git', :tag => '6.0.0'
+  pod 'Signals'
   
   target 'PaneViewControllerTests' do
     inherit! :search_paths
