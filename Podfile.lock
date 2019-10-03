@@ -5,7 +5,7 @@ DEPENDENCIES:
   - Signals
 
 SPEC REPOS:
-  https://cdn.cocoapods.org/:
+  trunk:
     - Signals
 
 SPEC CHECKSUMS:
