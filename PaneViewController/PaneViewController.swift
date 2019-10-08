@@ -54,6 +54,7 @@ open class PaneViewController: UIViewController {
     public let secondaryViewController: UIViewController
     public let primaryViewWillChangeWidthObservers = Signals.Signal<UIView>()
     public let primaryViewDidChangeWidthObservers = Signals.Signal<UIView>()
+    public let secondaryViewDidCloseObservers = Signals.Signal<Void>()
     public weak var delegate: PaneViewControllerDelegate?
     
     public private(set) var presentationMode = PresentationMode.modal
@@ -532,6 +533,8 @@ open class PaneViewController: UIViewController {
             case .modal:
                 break
             }
+
+            self.secondaryViewDidCloseObservers.fire()
         })
     }
     
