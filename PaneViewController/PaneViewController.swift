@@ -631,6 +631,7 @@ open class PaneViewController: UIViewController {
             newSideSecondaryViewWidthConstraint = secondaryViewSideContainerView.widthAnchor.constraint(equalToConstant: 0)
             secondaryViewSideContainerView.addConstraint(newSideSecondaryViewWidthConstraint)
             secondaryViewSideContainerTrailingConstraint?.constant = 0
+            secondaryViewDidCloseObservers.fire()
         }
 
         newSideSecondaryViewWidthConstraint.isActive = true
