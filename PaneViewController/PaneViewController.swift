@@ -348,6 +348,9 @@ open class PaneViewController: UIViewController {
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
+        guard UIApplication.shared.applicationState == .active
+            else { return }
+
         widthScreenWillTransitionTo = size.width
         updateSecondaryViewLocationForNewWidth(size.width)
 
