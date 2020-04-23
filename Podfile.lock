@@ -5,7 +5,7 @@ DEPENDENCIES:
   - Signals
 
 SPEC REPOS:
-  https://cdn.cocoapods.org/:
+  trunk:
     - Signals
 
 SPEC CHECKSUMS:
@@ -13,4 +13,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: d1fd6caa5b8f803110a18a623f0e3bfb671d5406
 
-COCOAPODS: 1.8.1
+COCOAPODS: 1.9.1

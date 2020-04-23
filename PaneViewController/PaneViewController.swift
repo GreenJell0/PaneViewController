@@ -338,6 +338,10 @@ open class PaneViewController: UIViewController {
 
                 if isSecondaryViewShowing {
                     secondaryViewModalContainerShowingLeadingConstraint?.constant = secondaryViewModalContainerOpenLocation
+                } else if widthScreenWillTransitionTo != view.frame.width {
+                    widthScreenWillTransitionTo = view.frame.width
+                    updateSecondaryViewLocationForNewWidth(view.frame.width)
+                    updateSizeClassOfChildViewControllers()
                 }
             } else {
                 secondaryViewModalContainerOpenLocation = 0

@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name         = "PaneViewController"
-  s.version      = "5.0.4"
+  s.version      = "5.0.5"
   s.summary      = "A side drawer controller"
   s.homepage     = "https://github.com/GreenJell0/PaneViewController"
   s.description  = <<-DESC
-A side drawer controller that toggles between modal and side by side view depending on horizontal trait collection
-                   DESC
+  A side drawer controller that toggles between modal and side by side view depending on horizontal trait collection
+  DESC
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = 'Branden Russell', 'Hilton Campbell', 'Stephan Heilner', 'Nick Shelley'
   s.platform     = :ios, "11.0"
