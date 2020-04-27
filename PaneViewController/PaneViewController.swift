@@ -338,10 +338,6 @@ open class PaneViewController: UIViewController {
 
                 if isSecondaryViewShowing {
                     secondaryViewModalContainerShowingLeadingConstraint?.constant = secondaryViewModalContainerOpenLocation
-                } else if widthScreenWillTransitionTo != view.frame.width {
-                    widthScreenWillTransitionTo = view.frame.width
-                    updateSecondaryViewLocationForNewWidth(view.frame.width)
-                    updateSizeClassOfChildViewControllers()
                 }
             } else {
                 secondaryViewModalContainerOpenLocation = 0
@@ -351,9 +347,6 @@ open class PaneViewController: UIViewController {
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-
-        guard UIApplication.shared.applicationState == .active
-            else { return }
 
         widthScreenWillTransitionTo = size.width
         updateSecondaryViewLocationForNewWidth(size.width)
@@ -520,11 +513,11 @@ open class PaneViewController: UIViewController {
         if view.frame.width >= minimumSideBySideScreenWidth {
             blurIfNeeded()
             primaryViewWillChangeWidthObservers.fire(primaryViewController.view)
-            updateSecondaryViewSideBySideConstraint(forPinningState: paneViewPinningState)
         } else {
             secondaryViewModalContainerShowingLeadingConstraint?.isActive = false
             secondaryViewModalContainerHiddenLeadingConstraint?.isActive = true
         }
+        updateSecondaryViewSideBySideConstraint(forPinningState: paneViewPinningState)
 
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.view.layoutIfNeeded()
@@ -541,7 +534,9 @@ open class PaneViewController: UIViewController {
                 break
             }
 
-            self.secondaryViewDidCloseObservers.fire()
+            if animated {
+                self.secondaryViewDidCloseObservers.fire()
+            }
         })
     }
     
