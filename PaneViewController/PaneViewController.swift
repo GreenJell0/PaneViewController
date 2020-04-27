@@ -534,7 +534,9 @@ open class PaneViewController: UIViewController {
                 break
             }
 
-            self.secondaryViewDidCloseObservers.fire()
+            if animated {
+                self.secondaryViewDidCloseObservers.fire()
+            }
         })
     }
     
