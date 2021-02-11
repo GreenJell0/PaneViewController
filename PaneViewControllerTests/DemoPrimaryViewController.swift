@@ -21,6 +21,7 @@
 //
 
 import UIKit
+import Pods_PaneViewController
 
 class DemoPrimaryViewController: UIViewController {
     

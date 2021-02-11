@@ -21,6 +21,7 @@
 //
 
 import UIKit
+import Pods_PaneViewController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

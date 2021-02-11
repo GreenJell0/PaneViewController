@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PaneViewController"
-  s.version      = "5.0.6"
+  s.version      = "5.0.7"
   s.summary      = "A side drawer controller"
   s.homepage     = "https://github.com/GreenJell0/PaneViewController"
   s.description  = <<-DESC
@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "11.0"
   s.source       = { :git => "https://github.com/GreenJell0/PaneViewController.git", :tag => s.version.to_s }
   s.requires_arc = true
-  s.source_files = "PaneViewController/*.{h,m,swift}"
-  s.resources    = "Resources/PaneViewController.xcassets"
+  s.source_files = "Sources/PaneViewController/*.{h,m,swift}"
+  s.resources    = "Resources/PaneViewController/PaneViewController.xcassets"
   s.framework    = "UIKit"
   s.swift_version = '5.0'
   s.dependency "Signals"

@@ -20,8 +20,9 @@
 // THE SOFTWARE.
 //
 
-import UIKit
 import Signals
+#if canImport(UIKit)
+import UIKit
 
 @objc public enum PaneViewPinningState: Int, CaseIterable {
     case openDefault = 1
@@ -740,3 +741,4 @@ public protocol PaneViewControllerDelegate: class {
     func paneViewControllerDidFinishPanning(_ paneViewController: PaneViewController)
     
 }
+#endif

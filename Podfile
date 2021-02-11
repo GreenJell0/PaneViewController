@@ -5,7 +5,7 @@ platform :ios, '11.0'
 use_frameworks!
 
 target 'PaneViewController' do
-  pod 'Signals'
+  pod 'PaneViewController', :path => '.'
   
   target 'PaneViewControllerTests' do
     inherit! :search_paths

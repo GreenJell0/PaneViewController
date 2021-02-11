@@ -20,6 +20,7 @@
 // THE SOFTWARE.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 protocol HandleViewDelegate: class {
@@ -39,3 +40,4 @@ class HandleView: UIView {
     }
     
 }
+#endif

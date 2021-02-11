@@ -10,17 +10,13 @@
 		2B74521AE85CC72813C6BEBE /* Pods_PaneViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EEF2DC4E3DBFF2D42FD2823 /* Pods_PaneViewController.framework */; };
 		6FC1F12682476CD4CA52D8AE /* Pods_PaneViewControllerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43670ED19D80553519CAA421 /* Pods_PaneViewControllerTests.framework */; };
 		BA16043B142299F93CC0020A /* Pods_PaneViewControllerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 668F525BF04103F22BFF1857 /* Pods_PaneViewControllerUITests.framework */; };
-		EC1157B61C849BFC002586EE /* UIViewControllerPaneViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1157B51C849BFC002586EE /* UIViewControllerPaneViewExtension.swift */; };
 		ECA332651C7F62B7008D5F42 /* PaneViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA332641C7F62B7008D5F42 /* PaneViewControllerTests.swift */; };
 		ECA332701C7F62B7008D5F42 /* PaneViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA3326F1C7F62B7008D5F42 /* PaneViewControllerUITests.swift */; };
 		ECA332871C7F6749008D5F42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA332801C7F6749008D5F42 /* AppDelegate.swift */; };
 		ECA332881C7F6749008D5F42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA332811C7F6749008D5F42 /* Assets.xcassets */; };
 		ECA332891C7F6749008D5F42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA332831C7F6749008D5F42 /* LaunchScreen.storyboard */; };
-		ECA3328E1C7F6771008D5F42 /* PaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA3328D1C7F6771008D5F42 /* PaneViewController.swift */; };
 		ECA332901C7F69B0008D5F42 /* DemoPrimaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA3328F1C7F69B0008D5F42 /* DemoPrimaryViewController.swift */; };
 		ECA332921C7F7D89008D5F42 /* DemoSecondaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA332911C7F7D89008D5F42 /* DemoSecondaryViewController.swift */; };
-		ECB9241B1CAAECA3001868E9 /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB9241A1CAAECA3001868E9 /* HandleView.swift */; };
-		ECFF68591CA03DCE00F793D3 /* PaneViewController.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECFF68581CA03DCE00F793D3 /* PaneViewController.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +46,6 @@
 		77DC8684AA9C797EA615EFD6 /* Pods-PaneViewControllerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaneViewControllerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PaneViewControllerUITests/Pods-PaneViewControllerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		90BFE3E369695068C0D4C012 /* Pods-PaneViewControllerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaneViewControllerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PaneViewControllerTests/Pods-PaneViewControllerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E00C5DE7B2C34215798DFAB6 /* Pods-PaneViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaneViewController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PaneViewController/Pods-PaneViewController.debug.xcconfig"; sourceTree = "<group>"; };
-		EC1157B51C849BFC002586EE /* UIViewControllerPaneViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewControllerPaneViewExtension.swift; path = PaneViewController/UIViewControllerPaneViewExtension.swift; sourceTree = "<group>"; };
 		ECA3324C1C7F62B7008D5F42 /* PaneViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaneViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA332601C7F62B7008D5F42 /* PaneViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaneViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA332641C7F62B7008D5F42 /* PaneViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaneViewControllerTests.swift; sourceTree = "<group>"; };
@@ -63,11 +58,8 @@
 		ECA332811C7F6749008D5F42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = PaneViewControllerDemo/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		ECA332841C7F6749008D5F42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECA332851C7F6749008D5F42 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PaneViewControllerDemo/Info.plist; sourceTree = SOURCE_ROOT; };
-		ECA3328D1C7F6771008D5F42 /* PaneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaneViewController.swift; path = PaneViewController/PaneViewController.swift; sourceTree = "<group>"; };
 		ECA3328F1C7F69B0008D5F42 /* DemoPrimaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoPrimaryViewController.swift; sourceTree = "<group>"; };
 		ECA332911C7F7D89008D5F42 /* DemoSecondaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoSecondaryViewController.swift; sourceTree = "<group>"; };
-		ECB9241A1CAAECA3001868E9 /* HandleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HandleView.swift; path = PaneViewController/HandleView.swift; sourceTree = "<group>"; };
-		ECFF68581CA03DCE00F793D3 /* PaneViewController.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = PaneViewController.xcassets; path = Resources/PaneViewController.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +116,6 @@
 		ECA332431C7F62B7008D5F42 = {
 			isa = PBXGroup;
 			children = (
-				ECA3328C1C7F6764008D5F42 /* PaneViewController */,
 				ECA3327E1C7F672E008D5F42 /* PaneViewControllerDemo */,
 				ECA332631C7F62B7008D5F42 /* PaneViewControllerTests */,
 				ECA3326E1C7F62B7008D5F42 /* PaneViewControllerUITests */,
@@ -176,17 +167,6 @@
 			path = PaneViewControllerTests;
 			sourceTree = "<group>";
 		};
-		ECA3328C1C7F6764008D5F42 /* PaneViewController */ = {
-			isa = PBXGroup;
-			children = (
-				ECFF68571CA03D7900F793D3 /* Resources */,
-				ECA3328D1C7F6771008D5F42 /* PaneViewController.swift */,
-				EC1157B51C849BFC002586EE /* UIViewControllerPaneViewExtension.swift */,
-				ECB9241A1CAAECA3001868E9 /* HandleView.swift */,
-			);
-			name = PaneViewController;
-			sourceTree = "<group>";
-		};
 		ECA332931C7F7F00008D5F42 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,14 +174,6 @@
 				ECA332911C7F7D89008D5F42 /* DemoSecondaryViewController.swift */,
 			);
 			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		ECFF68571CA03D7900F793D3 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				ECFF68581CA03DCE00F793D3 /* PaneViewController.xcassets */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,7 +289,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECA332881C7F6749008D5F42 /* Assets.xcassets in Resources */,
-				ECFF68591CA03DCE00F793D3 /* PaneViewController.xcassets in Resources */,
 				ECA332891C7F6749008D5F42 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,10 +353,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PaneViewController/Pods-PaneViewController-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/PaneViewController/PaneViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Signals/Signals.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PaneViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Signals.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,9 +407,6 @@
 			files = (
 				ECA332921C7F7D89008D5F42 /* DemoSecondaryViewController.swift in Sources */,
 				ECA332901C7F69B0008D5F42 /* DemoPrimaryViewController.swift in Sources */,
-				ECB9241B1CAAECA3001868E9 /* HandleView.swift in Sources */,
-				EC1157B61C849BFC002586EE /* UIViewControllerPaneViewExtension.swift in Sources */,
-				ECA3328E1C7F6771008D5F42 /* PaneViewController.swift in Sources */,
 				ECA332871C7F6749008D5F42 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

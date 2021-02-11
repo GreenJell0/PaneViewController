@@ -20,6 +20,7 @@
 // THE SOFTWARE.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 public protocol PaneViewControllerProtocol {
@@ -44,3 +45,4 @@ extension UIViewController: PaneViewControllerProtocol {
     }
     
 }
+#endif
