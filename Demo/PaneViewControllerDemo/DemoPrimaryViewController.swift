@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 GreenJell0
+// Copyright (c) 2021 GreenJell0
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,25 +21,33 @@
 //
 
 import UIKit
-import Pods_PaneViewController
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var window: UIWindow?
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let primaryNavigationController = UINavigationController(rootViewController: DemoPrimaryViewController())
-        let secondaryNavigationController = UINavigationController(rootViewController: DemoSecondaryViewController())
-        let paneViewController = PaneViewController(primaryViewController: primaryNavigationController, secondaryViewController: secondaryNavigationController)
-        window?.rootViewController = paneViewController
-        let secondaryViewToBlur = UIView()
-        secondaryViewToBlur.backgroundColor = UIColor(red: 0, green: 0, blue: 1, alpha: 0.5)
-        paneViewController.secondaryViewToBlur = secondaryViewToBlur
-        window?.makeKeyAndVisible()
+class DemoPrimaryViewController: UIViewController {
+    
+    fileprivate let colors = [UIColor.green, UIColor.black, UIColor.orange, UIColor.purple]
+    
+    fileprivate var colorIndex = 0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        return true
+        title = "Primary View"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Show", style: .plain, target: self, action: #selector(showSecondaryView))
+        
+        view.backgroundColor = colors[colorIndex]
+    }
+    
+    @objc func showSecondaryView() {
+        showSecondaryViewAnimated(true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        colorIndex += 1
+        colorIndex %= colors.count
+        view.backgroundColor = colors[colorIndex]
     }
     
 }

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 GreenJell0
+// Copyright (c) 2021 GreenJell0
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,33 +20,26 @@
 // THE SOFTWARE.
 //
 
-import XCTest
+import UIKit
+import PaneViewController
 
-@available(iOS 9.0, *)
-class PaneViewControllerUITests: XCTestCase {
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let primaryNavigationController = UINavigationController(rootViewController: DemoPrimaryViewController())
+        let secondaryNavigationController = UINavigationController(rootViewController: DemoSecondaryViewController())
+        let paneViewController = PaneViewController(primaryViewController: primaryNavigationController, secondaryViewController: secondaryNavigationController)
+        window?.rootViewController = paneViewController
+        let secondaryViewToBlur = UIView()
+        secondaryViewToBlur.backgroundColor = UIColor(red: 0, green: 0, blue: 1, alpha: 0.5)
+        paneViewController.secondaryViewToBlur = secondaryViewToBlur
+        window?.makeKeyAndVisible()
         
-    override func setUp() {
-        super.setUp()
-        
-        continueAfterFailure = false
-        XCUIApplication().launch()
+        return true
     }
-    
-    // TODO: Xcode is currently having several problems with this test and I can't get it to run locally to work it out
-    /* func testShowHideSide() {
-        let app = XCUIApplication()
-        XCTAssertTrue(app.staticTexts["Primary View"].hittable)
-        app.buttons["Show"].tap()
-        // The primary view should be covered in Compact, but not in Regular
-        if app.windows.elementBoundByIndex(0).horizontalSizeClass == .Compact {
-            XCTAssertFalse(app.staticTexts["Primary View"].hittable)
-        } else {
-            XCTAssertTrue(app.staticTexts["Primary View"].hittable)
-        }
-        XCTAssertTrue(app.staticTexts["Secondary View"].hittable)
-        // Now close the drawer
-        app.buttons["X"].tap()
-        XCTAssertTrue(app.staticTexts["Primary View"].hittable)
-    } */
     
 }

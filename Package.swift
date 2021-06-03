@@ -6,20 +6,17 @@ import PackageDescription
 let package = Package(
     name: "PaneViewController",
     platforms: [
-        .iOS(.v12),
+        .iOS(.v14),
     ],
     products: [
         .library(
             name: "PaneViewController",
             targets: ["PaneViewController"]),
     ],
-    dependencies: [
-        .package(name: "Signals", url: "https://github.com/artman/Signals.git", from: "6.1.0"),
-    ],
+    dependencies: [],
     targets: [
         .target(
-            name: "PaneViewController",
-            dependencies: ["Signals"]),
+            name: "PaneViewController"),
         .testTarget(
             name: "PaneViewControllerTests",
             dependencies: ["PaneViewController"]),

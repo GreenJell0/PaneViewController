@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D4AF1C4226696448000497DC /* DemoSecondaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AF1C4026696447000497DC /* DemoSecondaryViewController.swift */; };
+		D4AF1C4326696448000497DC /* DemoPrimaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AF1C4126696448000497DC /* DemoPrimaryViewController.swift */; };
+		D4AF1C5326696501000497DC /* PaneViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AF1C5226696501000497DC /* PaneViewControllerTests.swift */; };
+		D4D4E98F266961C2007294D6 /* PaneViewController in Frameworks */ = {isa = PBXBuildFile; productRef = D4D4E98E266961C2007294D6 /* PaneViewController */; };
+		ECA332871C7F6749008D5F42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA332801C7F6749008D5F42 /* AppDelegate.swift */; };
+		ECA332881C7F6749008D5F42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA332811C7F6749008D5F42 /* Assets.xcassets */; };
+		ECA332891C7F6749008D5F42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA332831C7F6749008D5F42 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D4AF1C4D266964E1000497DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECA332441C7F62B7008D5F42 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECA3324B1C7F62B7008D5F42;
+			remoteInfo = PaneViewControllerDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D4AF1C4026696447000497DC /* DemoSecondaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoSecondaryViewController.swift; path = PaneViewControllerDemo/DemoSecondaryViewController.swift; sourceTree = SOURCE_ROOT; };
+		D4AF1C4126696448000497DC /* DemoPrimaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoPrimaryViewController.swift; path = PaneViewControllerDemo/DemoPrimaryViewController.swift; sourceTree = SOURCE_ROOT; };
+		D4AF1C48266964E1000497DC /* PaneViewControllerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaneViewControllerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4AF1C4C266964E1000497DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4AF1C5226696501000497DC /* PaneViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaneViewControllerTests.swift; path = ../../Tests/PaneViewControllerTests/PaneViewControllerTests.swift; sourceTree = "<group>"; };
+		D4D4E98C26696184007294D6 /* PaneViewController */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PaneViewController; path = ..; sourceTree = "<group>"; };
+		ECA3324C1C7F62B7008D5F42 /* PaneViewControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaneViewControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECA332801C7F6749008D5F42 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = PaneViewControllerDemo/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		ECA332811C7F6749008D5F42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = PaneViewControllerDemo/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		ECA332841C7F6749008D5F42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ECA332851C7F6749008D5F42 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PaneViewControllerDemo/Info.plist; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D4AF1C45266964E1000497DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECA332491C7F62B7008D5F42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4D4E98F266961C2007294D6 /* PaneViewController in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D4AF1C49266964E1000497DC /* PaneViewControllerDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				D4AF1C5226696501000497DC /* PaneViewControllerTests.swift */,
+				D4AF1C4C266964E1000497DC /* Info.plist */,
+			);
+			path = PaneViewControllerDemoTests;
+			sourceTree = "<group>";
+		};
+		ECA332431C7F62B7008D5F42 = {
+			isa = PBXGroup;
+			children = (
+				D4D4E98C26696184007294D6 /* PaneViewController */,
+				ECA3327E1C7F672E008D5F42 /* PaneViewControllerDemo */,
+				D4AF1C49266964E1000497DC /* PaneViewControllerDemoTests */,
+				ECA3324D1C7F62B7008D5F42 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ECA3324D1C7F62B7008D5F42 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ECA3324C1C7F62B7008D5F42 /* PaneViewControllerDemo.app */,
+				D4AF1C48266964E1000497DC /* PaneViewControllerDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ECA3327E1C7F672E008D5F42 /* PaneViewControllerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				D4AF1C4126696448000497DC /* DemoPrimaryViewController.swift */,
+				D4AF1C4026696447000497DC /* DemoSecondaryViewController.swift */,
+				ECA332931C7F7F00008D5F42 /* ViewControllers */,
+				ECA332801C7F6749008D5F42 /* AppDelegate.swift */,
+				ECA332811C7F6749008D5F42 /* Assets.xcassets */,
+				ECA332831C7F6749008D5F42 /* LaunchScreen.storyboard */,
+				ECA332851C7F6749008D5F42 /* Info.plist */,
+			);
+			name = PaneViewControllerDemo;
+			path = PaneViewControllerTests;
+			sourceTree = "<group>";
+		};
+		ECA332931C7F7F00008D5F42 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D4AF1C47266964E1000497DC /* PaneViewControllerDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4AF1C4F266964E1000497DC /* Build configuration list for PBXNativeTarget "PaneViewControllerDemoTests" */;
+			buildPhases = (
+				D4AF1C44266964E1000497DC /* Sources */,
+				D4AF1C45266964E1000497DC /* Frameworks */,
+				D4AF1C46266964E1000497DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4AF1C4E266964E1000497DC /* PBXTargetDependency */,
+			);
+			name = PaneViewControllerDemoTests;
+			productName = PaneViewControllerDemoTests;
+			productReference = D4AF1C48266964E1000497DC /* PaneViewControllerDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		ECA3324B1C7F62B7008D5F42 /* PaneViewControllerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECA332741C7F62B7008D5F42 /* Build configuration list for PBXNativeTarget "PaneViewControllerDemo" */;
+			buildPhases = (
+				ECA332481C7F62B7008D5F42 /* Sources */,
+				ECA332491C7F62B7008D5F42 /* Frameworks */,
+				ECA3324A1C7F62B7008D5F42 /* Resources */,
+				ECA3327D1C7F6353008D5F42 /* Swiftlint Run Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PaneViewControllerDemo;
+			packageProductDependencies = (
+				D4D4E98E266961C2007294D6 /* PaneViewController */,
+			);
+			productName = PaneViewController;
+			productReference = ECA3324C1C7F62B7008D5F42 /* PaneViewControllerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ECA332441C7F62B7008D5F42 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Intellectual Reserve, Inc";
+				TargetAttributes = {
+					D4AF1C47266964E1000497DC = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = ECA3324B1C7F62B7008D5F42;
+					};
+					ECA3324B1C7F62B7008D5F42 = {
+						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0900;
+					};
+				};
+			};
+			buildConfigurationList = ECA332471C7F62B7008D5F42 /* Build configuration list for PBXProject "PaneViewControllerDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ECA332431C7F62B7008D5F42;
+			packageReferences = (
+				D4D4E98D266961C2007294D6 /* XCRemoteSwiftPackageReference "PaneViewController" */,
+			);
+			productRefGroup = ECA3324D1C7F62B7008D5F42 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ECA3324B1C7F62B7008D5F42 /* PaneViewControllerDemo */,
+				D4AF1C47266964E1000497DC /* PaneViewControllerDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D4AF1C46266964E1000497DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECA3324A1C7F62B7008D5F42 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECA332881C7F6749008D5F42 /* Assets.xcassets in Resources */,
+				ECA332891C7F6749008D5F42 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ECA3327D1C7F6353008D5F42 /* Swiftlint Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Swiftlint Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint lint --config swiftlint.yml\nelse\necho \"SwiftLint cannot be found, install with 'brew install swiftlint'\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D4AF1C44266964E1000497DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4AF1C5326696501000497DC /* PaneViewControllerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECA332481C7F62B7008D5F42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4AF1C4326696448000497DC /* DemoPrimaryViewController.swift in Sources */,
+				D4AF1C4226696448000497DC /* DemoSecondaryViewController.swift in Sources */,
+				ECA332871C7F6749008D5F42 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D4AF1C4E266964E1000497DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECA3324B1C7F62B7008D5F42 /* PaneViewControllerDemo */;
+			targetProxy = D4AF1C4D266964E1000497DC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ECA332831C7F6749008D5F42 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ECA332841C7F6749008D5F42 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = ../PaneViewControllerDemo/Base.lproj;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D4AF1C50266964E1000497DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = PaneViewControllerDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.GreenJell0.PaneViewControllerDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PaneViewControllerDemo.app/PaneViewControllerDemo";
+			};
+			name = Debug;
+		};
+		D4AF1C51266964E1000497DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = PaneViewControllerDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.GreenJell0.PaneViewControllerDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PaneViewControllerDemo.app/PaneViewControllerDemo";
+			};
+			name = Release;
+		};
+		ECA332721C7F62B7008D5F42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ECA332731C7F62B7008D5F42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ECA332751C7F62B7008D5F42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/PaneViewControllerDemo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.lds.PaneViewController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+			};
+			name = Debug;
+		};
+		ECA332761C7F62B7008D5F42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/PaneViewControllerDemo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.lds.PaneViewController;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D4AF1C4F266964E1000497DC /* Build configuration list for PBXNativeTarget "PaneViewControllerDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4AF1C50266964E1000497DC /* Debug */,
+				D4AF1C51266964E1000497DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECA332471C7F62B7008D5F42 /* Build configuration list for PBXProject "PaneViewControllerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECA332721C7F62B7008D5F42 /* Debug */,
+				ECA332731C7F62B7008D5F42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECA332741C7F62B7008D5F42 /* Build configuration list for PBXNativeTarget "PaneViewControllerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECA332751C7F62B7008D5F42 /* Debug */,
+				ECA332761C7F62B7008D5F42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D4D4E98D266961C2007294D6 /* XCRemoteSwiftPackageReference "PaneViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:GreenJell0/PaneViewController.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D4D4E98E266961C2007294D6 /* PaneViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4D4E98D266961C2007294D6 /* XCRemoteSwiftPackageReference "PaneViewController" */;
+			productName = PaneViewController;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = ECA332441C7F62B7008D5F42 /* Project object */;
+}
