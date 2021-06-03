@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 GreenJell0
+// Copyright (c) 2021 GreenJell0
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +23,8 @@
 #if canImport(UIKit)
 import UIKit
 
-protocol HandleViewDelegate: class {
-    
+protocol HandleViewDelegate: AnyObject {
     func hitTest(_ point: CGPoint, withEvent event: UIEvent?, inView: UIView) -> UIView?
-    
 }
 
 class HandleView: UIView {

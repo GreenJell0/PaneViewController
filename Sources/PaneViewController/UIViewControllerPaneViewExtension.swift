@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 GreenJell0
+// Copyright (c) 2021 GreenJell0
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,10 +24,8 @@
 import UIKit
 
 public protocol PaneViewControllerProtocol {
-    
     func showSecondaryViewAnimated(_ animated: Bool, pinningState: PaneViewPinningState)
     func dismissSecondaryViewAnimated(_ animated: Bool)
-    
 }
 
 extension UIViewController: PaneViewControllerProtocol {

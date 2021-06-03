@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ECA3324B1C7F62B7008D5F42"
-               BuildableName = "PaneViewController.app"
-               BlueprintName = "PaneViewController"
-               ReferencedContainer = "container:PaneViewController.xcodeproj">
+               BuildableName = "PaneViewControllerDemo.app"
+               BlueprintName = "PaneViewControllerDemo"
+               ReferencedContainer = "container:PaneViewControllerDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -27,15 +27,24 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "ECA3324B1C7F62B7008D5F42"
+            BuildableName = "PaneViewControllerDemo.app"
+            BlueprintName = "PaneViewControllerDemo"
+            ReferencedContainer = "container:PaneViewControllerDemo.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ECA3325F1C7F62B7008D5F42"
-               BuildableName = "PaneViewControllerTests.xctest"
-               BlueprintName = "PaneViewControllerTests"
-               ReferencedContainer = "container:PaneViewController.xcodeproj">
+               BuildableName = "PaneViewControllerDemoTests.xctest"
+               BlueprintName = "PaneViewControllerDemoTests"
+               ReferencedContainer = "container:PaneViewControllerDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,23 +52,12 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ECA3326A1C7F62B7008D5F42"
-               BuildableName = "PaneViewControllerUITests.xctest"
-               BlueprintName = "PaneViewControllerUITests"
-               ReferencedContainer = "container:PaneViewController.xcodeproj">
+               BuildableName = "PaneViewControllerDemoUITests.xctest"
+               BlueprintName = "PaneViewControllerDemoUITests"
+               ReferencedContainer = "container:PaneViewControllerDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ECA3324B1C7F62B7008D5F42"
-            BuildableName = "PaneViewController.app"
-            BlueprintName = "PaneViewController"
-            ReferencedContainer = "container:PaneViewController.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -76,13 +74,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ECA3324B1C7F62B7008D5F42"
-            BuildableName = "PaneViewController.app"
-            BlueprintName = "PaneViewController"
-            ReferencedContainer = "container:PaneViewController.xcodeproj">
+            BuildableName = "PaneViewControllerDemo.app"
+            BlueprintName = "PaneViewControllerDemo"
+            ReferencedContainer = "container:PaneViewControllerDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -95,9 +91,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ECA3324B1C7F62B7008D5F42"
-            BuildableName = "PaneViewController.app"
-            BlueprintName = "PaneViewController"
-            ReferencedContainer = "container:PaneViewController.xcodeproj">
+            BuildableName = "PaneViewControllerDemo.app"
+            BlueprintName = "PaneViewControllerDemo"
+            ReferencedContainer = "container:PaneViewControllerDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 GreenJell0
+// Copyright (c) 2021 GreenJell0
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,9 @@
 // THE SOFTWARE.
 //
 
-import Signals
 #if canImport(UIKit)
+
+import Combine
 import UIKit
 
 @objc public enum PaneViewPinningState: Int, CaseIterable {
@@ -41,6 +42,12 @@ import UIKit
     }
 }
 
+public extension Notification.Name {
+    static let primaryViewWillChangeWidth = Notification.Name("PaneViewController.primaryViewWillChangeWidth")
+    static let primaryViewDidChangeWidth = Notification.Name("PaneViewController.primaryViewDidChangeWidth")
+    static let secondaryViewDidClose = Notification.Name("PaneViewController.secondaryViewDidClose")
+}
+
 open class PaneViewController: UIViewController {
     
     public static var minimumWidth: CGFloat = 320
@@ -53,9 +60,9 @@ open class PaneViewController: UIViewController {
     
     public let primaryViewController: UIViewController
     public let secondaryViewController: UIViewController
-    public let primaryViewWillChangeWidthObservers = Signals.Signal<UIView>()
-    public let primaryViewDidChangeWidthObservers = Signals.Signal<UIView>()
-    public let secondaryViewDidCloseObservers = Signals.Signal<Void>()
+    public let primaryViewWillChangeWidthObservers = NotificationCenter.Publisher(center: .default, name: .primaryViewWillChangeWidth).compactMap { $0.object as? UIView }
+    public let primaryViewDidChangeWidthObservers = NotificationCenter.Publisher(center: .default, name: .primaryViewDidChangeWidth).compactMap { $0.object as? UIView }
+    public let secondaryViewDidCloseObservers = NotificationCenter.Publisher(center: .default, name: .secondaryViewDidClose)
     public weak var delegate: PaneViewControllerDelegate?
     
     public private(set) var presentationMode = PresentationMode.modal
@@ -372,7 +379,7 @@ open class PaneViewController: UIViewController {
                 if sideHandleTouchView.frame.contains(gestureRecognizer.location(in: view)) {
                     delegate?.paneViewControllerDidStartPanning(self)
                     
-                    primaryViewWillChangeWidthObservers.fire(primaryViewController.view)
+                    NotificationCenter.default.post(name: .primaryViewWillChangeWidth, object: primaryViewController.view)
                     touchStartedDownInHandle = true
                     secondaryViewSideContainerDraggingWidthConstraint?.constant = secondaryViewSideContainerView.bounds.width
                     secondaryViewSideContainerDraggingWidthConstraint?.isActive = true
@@ -431,7 +438,7 @@ open class PaneViewController: UIViewController {
                 secondaryViewSideContainerDraggingWidthConstraint?.isActive = false
                 secondaryViewSideContainerCurrentWidthConstraint?.isActive = true
                 moveSideViewToPredeterminedPositionClosestToWidthAnimated(true)
-                primaryViewDidChangeWidthObservers.fire(primaryViewController.view)
+                NotificationCenter.default.post(name: .primaryViewDidChangeWidth, object: primaryViewController.view)
             case .modal:
                 // If they tapped or dragged past the first quarter of the screen (if secondary was open) or drag only to the first quarter of the screen (if secondary started closed), close (again)
                 let dragVelocity = gestureRecognizer.velocity(in: view).x
@@ -477,7 +484,7 @@ open class PaneViewController: UIViewController {
         if widthScreenWillTransitionTo >= minimumSideBySideScreenWidth {
             modalShadowViewAlpha = 0
             blurIfNeeded()
-            primaryViewWillChangeWidthObservers.fire(primaryViewController.view)
+            NotificationCenter.default.post(name: .primaryViewWillChangeWidth, object: primaryViewController.view)
             updateSecondaryViewSideBySideConstraint(forPinningState: pinningState)
         } else {
             primaryViewController.view.addSubview(modalShadowView)
@@ -498,7 +505,7 @@ open class PaneViewController: UIViewController {
 
             switch self.presentationMode {
             case .sideBySide:
-                self.primaryViewDidChangeWidthObservers.fire(self.primaryViewController.view)
+                NotificationCenter.default.post(name: .primaryViewDidChangeWidth, object: self.primaryViewController.view)
             case .modal:
                 break
             }
@@ -513,7 +520,7 @@ open class PaneViewController: UIViewController {
 
         if view.frame.width >= minimumSideBySideScreenWidth {
             blurIfNeeded()
-            primaryViewWillChangeWidthObservers.fire(primaryViewController.view)
+            NotificationCenter.default.post(name: .primaryViewWillChangeWidth, object: primaryViewController.view)
         } else {
             secondaryViewModalContainerShowingLeadingConstraint?.isActive = false
             secondaryViewModalContainerHiddenLeadingConstraint?.isActive = true
@@ -530,13 +537,13 @@ open class PaneViewController: UIViewController {
 
             switch self.presentationMode {
             case .sideBySide:
-                self.primaryViewDidChangeWidthObservers.fire(self.primaryViewController.view)
+                NotificationCenter.default.post(name: .primaryViewDidChangeWidth, object: self.primaryViewController.view)
             case .modal:
                 break
             }
 
             if animated {
-                self.secondaryViewDidCloseObservers.fire()
+                NotificationCenter.default.post(name: .secondaryViewDidClose, object: nil)
             }
         })
     }
@@ -634,7 +641,7 @@ open class PaneViewController: UIViewController {
             newSideSecondaryViewWidthConstraint = secondaryViewSideContainerView.widthAnchor.constraint(equalToConstant: 0)
             secondaryViewSideContainerView.addConstraint(newSideSecondaryViewWidthConstraint)
             secondaryViewSideContainerTrailingConstraint?.constant = 0
-            secondaryViewDidCloseObservers.fire()
+            NotificationCenter.default.post(name: .secondaryViewDidClose, object: nil)
         }
 
         newSideSecondaryViewWidthConstraint.isActive = true
@@ -665,7 +672,7 @@ open class PaneViewController: UIViewController {
         }, completion: { _ in
             self.removeBlurIfNeeded()
             self.updateSizeClassOfChildViewControllers()
-            self.primaryViewDidChangeWidthObservers.fire(self.primaryViewController.view)
+            NotificationCenter.default.post(name: .primaryViewDidChangeWidth, object: self.primaryViewController.view)
         })
         
     }
@@ -735,7 +742,7 @@ extension PaneViewController: UIGestureRecognizerDelegate {
     
 }
 
-public protocol PaneViewControllerDelegate: class {
+public protocol PaneViewControllerDelegate: AnyObject {
     
     func paneViewControllerDidStartPanning(_ paneViewController: PaneViewController)
     func paneViewControllerDidFinishPanning(_ paneViewController: PaneViewController)
