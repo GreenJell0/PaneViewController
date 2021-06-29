@@ -678,11 +678,6 @@ open class PaneViewController: UIViewController {
     }
     
     private func updateSecondaryViewLocationForNewWidth(_ newWidth: CGFloat) {
-        if isSecondaryViewShowing {
-            dismissSecondaryViewAnimated(false)
-            showSecondaryViewAnimated(false)
-        }
-
         if newWidth >= minimumSideBySideScreenWidth {
             presentationMode = .sideBySide
             sideHandleTouchView.isUserInteractionEnabled = true
