@@ -51,7 +51,6 @@ public extension Notification.Name {
 open class PaneViewController: UIViewController {
     
     public static var minimumWidth: CGFloat = 320
-    public static var maximumWidth: CGFloat = .greatestFiniteMagnitude
     public static var modalOpenGap: CGFloat = 20
     
     public enum PresentationMode {
@@ -73,7 +72,6 @@ open class PaneViewController: UIViewController {
     public var secondaryViewToBlur: UIView?
     public var shouldBlurWhenSideBySideResizes = true
     public var shouldAllowDragModal = true
-    public var shouldAllowSidebySide = true
     public var handleColor = UIColor(red: 197.0 / 255.0, green: 197.0 / 255.0, blue: 197.0 / 255.0, alpha: 0.5) {
         didSet {
             if isViewLoaded {
@@ -341,7 +339,7 @@ open class PaneViewController: UIViewController {
         
         if !touchStartedDownInHandle {
             // Find the narrow side and make it so the modal only goes out that far, even in the other orientation
-            if !shouldAllowSidebySide || view.frame.width < minimumSideBySideScreenWidth || view.frame.height < minimumSideBySideScreenWidth {
+            if view.frame.width < minimumSideBySideScreenWidth || view.frame.height < minimumSideBySideScreenWidth {
                 let narrowestSide = min(view.bounds.height, view.bounds.width)
                 secondaryViewModalContainerOpenLocation = view.bounds.width - narrowestSide
                 secondaryViewModalContainerWidthConstraint?.constant = narrowestSide
@@ -424,7 +422,7 @@ open class PaneViewController: UIViewController {
                     secondaryViewSideContainerTrailingConstraint?.constant = -newConstant + PaneViewController.minimumWidth
                     secondaryViewSideContainerDraggingWidthConstraint?.constant = PaneViewController.minimumWidth
                 } else {
-                    secondaryViewSideContainerDraggingWidthConstraint?.constant = min(newConstant, PaneViewController.maximumWidth)
+                    secondaryViewSideContainerDraggingWidthConstraint?.constant = newConstant
                 }
             case .modal:
                 secondaryViewModalContainerShowingLeadingConstraint?.constant = max(location.x - PaneViewController.modalOpenGap - (modalStartLocationX ?? 0), secondaryViewModalContainerOpenLocation)
@@ -483,7 +481,7 @@ open class PaneViewController: UIViewController {
         paneViewPinningState = pinningState
 
         let modalShadowViewAlpha: CGFloat
-        if widthScreenWillTransitionTo >= minimumSideBySideScreenWidth && shouldAllowSidebySide {
+        if widthScreenWillTransitionTo >= minimumSideBySideScreenWidth {
             modalShadowViewAlpha = 0
             blurIfNeeded()
             NotificationCenter.default.post(name: .primaryViewWillChangeWidth, object: primaryViewController.view)
@@ -520,7 +518,7 @@ open class PaneViewController: UIViewController {
         isSecondaryViewShowing = false
         paneViewPinningState = .closed
 
-        if view.frame.width >= minimumSideBySideScreenWidth && shouldAllowSidebySide {
+        if view.frame.width >= minimumSideBySideScreenWidth {
             blurIfNeeded()
             NotificationCenter.default.post(name: .primaryViewWillChangeWidth, object: primaryViewController.view)
         } else {
@@ -680,9 +678,7 @@ open class PaneViewController: UIViewController {
     }
     
     private func updateSecondaryViewLocationForNewWidth(_ newWidth: CGFloat) {
-        let previousPresentationMode = presentationMode
-        
-        if newWidth >= minimumSideBySideScreenWidth && shouldAllowSidebySide {
+        if newWidth >= minimumSideBySideScreenWidth {
             presentationMode = .sideBySide
             sideHandleTouchView.isUserInteractionEnabled = true
             modalHandleTouchView.isUserInteractionEnabled = false
@@ -709,24 +705,6 @@ open class PaneViewController: UIViewController {
                 modalShadowImageView.topAnchor.constraint(equalTo: secondaryViewModalContainerView.topAnchor),
                 modalShadowImageView.bottomAnchor.constraint(equalTo: secondaryViewModalContainerView.bottomAnchor)
             ])
-        }
-        
-        // Handle transition if we switched presentation modes (e.g. device rotation)
-        if presentationMode != previousPresentationMode {
-            switch presentationMode {
-            case .sideBySide:
-                modalShadowImageView.alpha = 0
-                modalShadowView.alpha = 0
-                secondaryViewModalContainerHiddenLeadingConstraint?.isActive = true
-                secondaryViewModalContainerShowingLeadingConstraint?.isActive = false
-            case .modal:
-                modalShadowImageView.alpha = isSecondaryViewShowing ? 1 : 0
-                modalShadowView.alpha = isSecondaryViewShowing ? 1 : 0
-                secondaryViewSideContainerCurrentWidthConstraint?.constant = 0
-                secondaryViewModalContainerShowingLeadingConstraint?.constant = secondaryViewModalContainerOpenLocation
-                secondaryViewModalContainerHiddenLeadingConstraint?.isActive = false
-                secondaryViewModalContainerShowingLeadingConstraint?.isActive = true
-            }
         }
     }
     
