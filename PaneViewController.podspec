@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PaneViewController"
-  s.version      = "6.0.1"
+  s.version      = "6.0.3"
   s.summary      = "A side drawer controller"
   s.homepage     = "https://github.com/GreenJell0/PaneViewController"
   s.description  = <<-DESC
