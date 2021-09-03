@@ -302,7 +302,7 @@ open class PaneViewController: UIViewController {
             sideHandleView.bottomAnchor.constraint(equalTo: secondaryViewSideContainerView.bottomAnchor)
             ])
         // We need a constraint for the width to make it off screen
-        updateSecondaryViewSideBySideConstraint(forPinningState: .closed)
+        updateSecondaryViewSideBySideConstraint(forPinningState: .closed, animated: false)
 
         let secondaryViewModalContainerHiddenLeadingConstraint = secondaryViewModalContainerView.leadingAnchor.constraint(equalTo: view.trailingAnchor)
         secondaryViewModalContainerHiddenLeadingConstraint.isActive = true
@@ -485,7 +485,7 @@ open class PaneViewController: UIViewController {
             modalShadowViewAlpha = 0
             blurIfNeeded()
             NotificationCenter.default.post(name: .primaryViewWillChangeWidth, object: primaryViewController.view)
-            updateSecondaryViewSideBySideConstraint(forPinningState: pinningState)
+            updateSecondaryViewSideBySideConstraint(forPinningState: pinningState, animated: animated)
         } else {
             primaryViewController.view.addSubview(modalShadowView)
             modalShadowViewAlpha = 1
@@ -525,7 +525,7 @@ open class PaneViewController: UIViewController {
             secondaryViewModalContainerShowingLeadingConstraint?.isActive = false
             secondaryViewModalContainerHiddenLeadingConstraint?.isActive = true
         }
-        updateSecondaryViewSideBySideConstraint(forPinningState: paneViewPinningState)
+        updateSecondaryViewSideBySideConstraint(forPinningState: paneViewPinningState, animated: animated)
 
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.view.layoutIfNeeded()
@@ -617,7 +617,7 @@ open class PaneViewController: UIViewController {
         }
     }
     
-    private func updateSecondaryViewSideBySideConstraint(forPinningState pinningState: PaneViewPinningState) {
+    private func updateSecondaryViewSideBySideConstraint(forPinningState pinningState: PaneViewPinningState, animated: Bool) {
         if let secondaryViewSideContainerCurrentWidthConstraint = secondaryViewSideContainerCurrentWidthConstraint {
             secondaryViewSideContainerView.removeConstraint(secondaryViewSideContainerCurrentWidthConstraint)
             view.removeConstraint(secondaryViewSideContainerCurrentWidthConstraint)
@@ -641,7 +641,9 @@ open class PaneViewController: UIViewController {
             newSideSecondaryViewWidthConstraint = secondaryViewSideContainerView.widthAnchor.constraint(equalToConstant: 0)
             secondaryViewSideContainerView.addConstraint(newSideSecondaryViewWidthConstraint)
             secondaryViewSideContainerTrailingConstraint?.constant = 0
-            NotificationCenter.default.post(name: .secondaryViewDidClose, object: nil)
+            if animated {
+                NotificationCenter.default.post(name: .secondaryViewDidClose, object: nil)
+            }
         }
 
         newSideSecondaryViewWidthConstraint.isActive = true
@@ -665,7 +667,7 @@ open class PaneViewController: UIViewController {
         }
 
         paneViewPinningState = bestPinningState
-        updateSecondaryViewSideBySideConstraint(forPinningState: bestPinningState)
+        updateSecondaryViewSideBySideConstraint(forPinningState: bestPinningState, animated: animated)
 
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.view.layoutIfNeeded()
@@ -678,6 +680,11 @@ open class PaneViewController: UIViewController {
     }
     
     private func updateSecondaryViewLocationForNewWidth(_ newWidth: CGFloat) {
+        if isSecondaryViewShowing {
+             dismissSecondaryViewAnimated(false)
+             showSecondaryViewAnimated(false)
+         }
+        
         if newWidth >= minimumSideBySideScreenWidth {
             presentationMode = .sideBySide
             sideHandleTouchView.isUserInteractionEnabled = true
@@ -685,7 +692,7 @@ open class PaneViewController: UIViewController {
             secondaryViewController.view.frame = secondaryViewSideContainerView.bounds
             secondaryViewController.view.translatesAutoresizingMaskIntoConstraints = true
             secondaryViewSideContainerView.insertSubview(secondaryViewController.view, at: 0)
-            updateSecondaryViewSideBySideConstraint(forPinningState: paneViewPinningState)
+            updateSecondaryViewSideBySideConstraint(forPinningState: paneViewPinningState, animated: false)
         } else {
             presentationMode = .modal
             sideHandleTouchView.isUserInteractionEnabled = false
