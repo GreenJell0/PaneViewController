@@ -65,8 +65,14 @@ open class PaneViewController: UIViewController {
     public let secondaryViewDidCloseObservers = NotificationCenter.Publisher(center: .default, name: .secondaryViewDidClose)
     public weak var delegate: PaneViewControllerDelegate?
     
-    public private(set) var presentationMode = PresentationMode.modal
-    public private(set) var isSecondaryViewShowing = false
+    public private(set) var presentationMode = PresentationMode.modal {
+        didSet { updateHandleInteractivity() }
+    }
+    
+    public private(set) var isSecondaryViewShowing = false {
+        didSet { updateHandleInteractivity() }
+    }
+    
     public var canOpenSecondaryViewWithSwipe = true
     public var primaryViewToBlur: UIView?
     public var secondaryViewToBlur: UIView?
@@ -332,6 +338,7 @@ open class PaneViewController: UIViewController {
         view.addGestureRecognizer(panGestureRecognizer)
         modalShadowView.addGestureRecognizer(modalShadowCloseTapGestureRecognizer)
         modalHandleTouchView.addGestureRecognizer(modalHandleCloseTapGestureRecognizer)
+        updateHandleInteractivity()
     }
     
     open override func viewDidLayoutSubviews() {
@@ -687,16 +694,12 @@ open class PaneViewController: UIViewController {
         
         if newWidth >= minimumSideBySideScreenWidth {
             presentationMode = .sideBySide
-            sideHandleTouchView.isUserInteractionEnabled = true
-            modalHandleTouchView.isUserInteractionEnabled = false
             secondaryViewController.view.frame = secondaryViewSideContainerView.bounds
             secondaryViewController.view.translatesAutoresizingMaskIntoConstraints = true
             secondaryViewSideContainerView.insertSubview(secondaryViewController.view, at: 0)
             updateSecondaryViewSideBySideConstraint(forPinningState: paneViewPinningState, animated: false)
         } else {
             presentationMode = .modal
-            sideHandleTouchView.isUserInteractionEnabled = false
-            modalHandleTouchView.isUserInteractionEnabled = true
             secondaryViewController.view.translatesAutoresizingMaskIntoConstraints = false
             secondaryViewModalContainerView.addSubview(secondaryViewController.view)
             secondaryViewModalContainerView.addSubview(modalShadowImageView)
@@ -713,6 +716,12 @@ open class PaneViewController: UIViewController {
                 modalShadowImageView.bottomAnchor.constraint(equalTo: secondaryViewModalContainerView.bottomAnchor)
             ])
         }
+    }
+    
+    /// Handles should have interactiviy `false` when not shown so that it doesn't interfere with touch handling. There can otherwise be some odd behavior with accessibility in navigation bars.
+    private func updateHandleInteractivity() {
+        modalHandleTouchView.isUserInteractionEnabled = isSecondaryViewShowing && presentationMode == .modal
+        sideHandleTouchView.isUserInteractionEnabled = isSecondaryViewShowing && presentationMode == .sideBySide
     }
     
 }
