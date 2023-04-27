@@ -751,6 +751,13 @@ extension PaneViewController: UIGestureRecognizerDelegate {
         return true
     }
     
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard gestureRecognizer == panGestureRecognizer
+        else { return true }
+        
+        return canOpenSecondaryViewWithSwipe || isSecondaryViewShowing
+    }
+    
 }
 
 public protocol PaneViewControllerDelegate: AnyObject {
