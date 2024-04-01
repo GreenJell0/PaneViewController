@@ -16,7 +16,10 @@ let package = Package(
     dependencies: [],
     targets: [
         .target(
-            name: "PaneViewController"),
+            name: "PaneViewController",
+            path: "Sources/PaneViewController",
+            resources: [.copy("PrivacyInfo.xcprivacy")]
+        ),
         .testTarget(
             name: "PaneViewControllerTests",
             dependencies: ["PaneViewController"]),
